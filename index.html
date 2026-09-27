@@ -318,6 +318,117 @@
     font-family:var(--mono);font-size:11.5px;line-height:1.55;max-height:170px;overflow:auto;white-space:pre-wrap;color:var(--ink-soft)}
   .f input.filled,.f select.filled{border-color:var(--seal);background:var(--seal-soft)}
   .shotwait{padding:34px;text-align:center;color:var(--ink-faint);font-family:var(--mono);font-size:12px;letter-spacing:.1em}
+  /* ===================== 版型：筆電 ===================== */
+  @media(max-width:1180px){
+    .wrap{padding:18px 14px 70px}
+    .grid{grid-template-columns:330px minmax(0,1fr);gap:14px}
+    table{min-width:0}
+    th,td{padding:7px 8px;font-size:13px}
+    th{font-size:10px}
+  }
+  /* 全部都是台幣時，收起幣別相關欄位，桌機就不用左右拖 */
+  table.twd-only .c-cur,table.twd-only .c-rate,table.twd-only .c-orig{display:none}
+
+  /* ===================== 版型：手機 ===================== */
+  @media(max-width:700px){
+    body{font-size:15.5px}
+    .wrap{padding:12px 0 92px}
+    header.top{padding:0 12px;gap:10px}
+    .brand h1{font-size:20px}
+    .brand .sub{display:none}
+    .top-right{width:100%;margin-left:0;gap:6px}
+    .top-right .btn{flex:1 1 auto;min-width:88px;padding:10px 6px;font-size:13px}
+    .grid{gap:12px}
+    .card,.receipt{border-radius:0;border-left:0;border-right:0}
+    .receipt::after{display:none}
+
+    /* 手機上先看到明細，統計面板放最後 */
+    .rightcol{display:flex;flex-direction:column}
+    .receipt{order:1}
+    .records{order:2;margin-top:12px!important}
+    .panels{order:3;margin-top:12px}
+
+    /* 點了不會被 iOS 自動放大 */
+    input,select,textarea{font-size:16px!important}
+    .f input,.f select{padding:10px}
+    .quickbar input{padding:13px 13px 13px 32px;font-size:15px}
+    .btn{padding:9px 12px}
+
+    /* 篩選列：橫向捲動的標籤列 */
+    .toolbar{gap:7px}
+    .seg{width:100%}
+    .seg button{flex:1;padding:9px 4px}
+    .toolbar input[type=date]{flex:1;min-width:0}
+    #tripFilter,#fSearch{flex:1 1 100%;min-width:0}
+    .chips{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
+    .chips::-webkit-scrollbar{display:none}
+    .chips .tag{flex:0 0 auto;padding:7px 12px}
+
+    /* 批次工具列吸在底部，拇指好按 */
+    .bulkbar{position:sticky;bottom:10px;z-index:6;box-shadow:0 6px 20px rgba(27,36,48,.18)}
+    .bulkbar .cnt{flex:1 1 100%;margin-bottom:2px}
+    .bulkbar .btn{flex:1}
+
+    /* ---- 明細：表格改成卡片 ---- */
+    .tablewrap{overflow:visible;border-top:0}
+    table{display:block}
+    thead{display:none}
+    tbody{display:block;padding:0 12px}
+    tbody tr{
+      display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 10px;
+      border:1px solid var(--rule);border-radius:10px;padding:10px 12px;margin-bottom:8px;background:var(--card)
+    }
+    tbody tr.picked{border-color:var(--seal)}
+    tbody td{display:block;border:0;padding:0;font-size:13px}
+    td.selcell{order:1;width:20px}
+    td.c-item{order:2;flex:1;min-width:0;font-size:15.5px;font-weight:600}
+    td.c-base{order:3;font-size:16px;font-weight:700;font-family:var(--mono)}
+    td.c-date,td.c-cat,td.c-trip,td.c-pay,td.c-amt,td.c-cur,td.c-rate,td.c-orig{
+      order:5;font-size:12px;color:var(--ink-soft)
+    }
+    td.c-date{order:4;flex:0 0 100%;font-size:12px;color:var(--ink-faint);margin-top:1px}
+    td.c-qty,td.c-price{display:none}
+    td.c-amt{display:block!important}
+    td.c-amt::before,td.c-cur::before,td.c-rate::before,td.c-orig::before{
+      content:attr(data-label);color:var(--ink-faint);margin-right:4px;font-size:11px
+    }
+    td.c-act{order:9;flex:0 0 100%;margin-top:7px;padding-top:7px;border-top:1px dotted var(--rule)}
+    td.c-act .rowbtns{justify-content:flex-start;gap:8px}
+    td.c-act .iconbtn{flex:1;padding:8px;font-size:13px}
+    td .catpill{font-size:12px}
+
+    /* 編輯中的卡片：欄位直排 */
+    tbody tr.editing{display:block;padding:12px}
+    tbody tr.editing td{display:block;width:100%;margin-bottom:8px}
+    tbody tr.editing td::before{
+      content:attr(data-label);display:block;font-size:11px;letter-spacing:.08em;
+      color:var(--ink-faint);font-family:var(--mono);margin-bottom:3px
+    }
+    tbody tr.editing td.selcell{display:none}
+    tbody tr.editing td.c-amt{display:none!important}
+    tbody tr td[colspan]{flex:1 1 100%;text-align:center}
+    form.detail{grid-template-columns:1fr}
+    tfoot{display:block;padding:0 12px}
+    tfoot tr{display:flex;justify-content:space-between;border:0;background:transparent;padding:6px 2px}
+    tfoot td{display:block;border:0;background:transparent;padding:0}
+    tfoot td:empty{display:none}
+
+    /* 統計面板 */
+    .panels{gap:12px}
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .rc-total{font-size:32px}
+    .triprow .meta{display:none}
+    svg.chart{height:150px}
+    dialog{width:calc(100% - 20px);max-height:88vh}
+    .dlg-body{max-height:64vh}
+    .bgrid{grid-template-columns:1fr;gap:6px}
+    .bgrid label{text-align:left}
+    #toast{left:12px;right:12px;bottom:14px;transform:translateY(90px);justify-content:space-between}
+    #toast.show{transform:translateY(0)}
+  }
+  @media(max-width:700px) and (orientation:landscape){
+    .wrap{padding-bottom:70px}
+  }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
@@ -392,7 +503,7 @@
     </section>
 
     <!-- ============ 右：分析 ============ -->
-    <div>
+    <div class="rightcol">
       <div class="receipt">
         <div class="rc-head">
           <div>
@@ -434,7 +545,7 @@
         </section>
       </div>
 
-      <section class="card" style="margin-top:18px">
+      <section class="card records" style="margin-top:18px">
         <h2><span class="zh">消費明細</span><span>RECORDS</span></h2>
         <div class="toolbar">
           <div class="seg" id="segRange">
@@ -466,17 +577,18 @@
               <th class="sortable" data-s="category">分類</th>
               <th class="sortable" data-s="trip">行程</th>
               <th class="sortable" data-s="pay">付款</th>
+              <th class="c-amt" style="display:none"></th>
               <th class="r sortable" data-s="qty">數量</th>
               <th class="r">單價</th>
-              <th>幣別</th>
-              <th class="r">匯率</th>
-              <th class="r sortable" data-s="orig">原幣小計</th>
+              <th class="c-cur">幣別</th>
+              <th class="r c-rate">匯率</th>
+              <th class="r sortable c-orig" data-s="orig">原幣小計</th>
               <th class="r sortable" data-s="base">台幣</th>
               <th class="r">操作</th>
             </tr></thead>
             <tbody id="tbody"></tbody>
             <tfoot><tr>
-              <td colspan="11" class="r" style="font-family:var(--sans);font-weight:600">合計（篩選後）</td>
+              <td colspan="11" id="footLabel" class="r" style="font-family:var(--sans);font-weight:600">合計（篩選後）</td>
               <td class="r" id="footTotal">NT$0</td><td></td>
             </tr></tfoot>
           </table>
@@ -988,6 +1100,9 @@ function renderMonths(list){
 
 function renderTable(list){
   const body=$('#tbody');
+  const twdOnly=list.every(r=>r.currency===BASE);
+  $('#tbl').classList.toggle('twd-only',twdOnly);
+  $('#footLabel').colSpan=twdOnly?8:11;
   if(!list.length){
     body.innerHTML=`<tr><td colspan="13"><div class="empty"><b>帳本還是空的</b>用左邊的一行輸入，記下第一筆</div></td></tr>`;return;
   }
@@ -996,38 +1111,40 @@ function renderTable(list){
     if(editingId===r.id){
       return `<tr class="editing" data-id="${r.id}">
         <td class="selcell"><input type="checkbox" class="rowsel" data-id="${r.id}" ${selection.has(r.id)?'checked':''} aria-label="選取"></td>
-        <td><input type="date" value="${esc(r.date)}" data-e="date"></td>
-        <td><input type="text" value="${esc(r.item)}" data-e="item"></td>
-        <td><select data-e="category">${cats.map(x=>`<option ${x.name===r.category?'selected':''}>${esc(x.name)}</option>`).join('')}</select></td>
-        <td style="min-width:110px"><select data-e="trip"><option value="">日常</option>${trips.map(t=>`<option ${t.name===(r.trip||'')?'selected':''}>${esc(t.name)}</option>`).join('')}</select></td>
-        <td style="min-width:118px">
+        <td class="c-amt" style="display:none"></td>
+        <td data-label="日期"><input type="date" value="${esc(r.date)}" data-e="date"></td>
+        <td data-label="品項"><input type="text" value="${esc(r.item)}" data-e="item"></td>
+        <td data-label="分類"><select data-e="category">${cats.map(x=>`<option ${x.name===r.category?'selected':''}>${esc(x.name)}</option>`).join('')}</select></td>
+        <td data-label="行程" style="min-width:110px"><select data-e="trip"><option value="">日常</option>${trips.map(t=>`<option ${t.name===(r.trip||'')?'selected':''}>${esc(t.name)}</option>`).join('')}</select></td>
+        <td data-label="付款／卡別" style="min-width:118px">
           <select data-e="pay" style="margin-bottom:4px">${PAYS.map(p=>`<option ${p.name===(r.pay||'現金')?'selected':''}>${p.name}</option>`).join('')}</select>
           <input type="text" data-e="account" placeholder="卡別／帳戶" value="${esc(r.account||'')}">
         </td>
-        <td><input type="number" step="any" value="${r.qty}" data-e="qty"></td>
-        <td><input type="number" step="any" value="${r.price}" data-e="price"></td>
-        <td><select data-e="currency">${CURRENCIES.map(([x])=>`<option ${x===r.currency?'selected':''}>${x}</option>`).join('')}</select></td>
-        <td><input type="number" step="any" value="${r.rate}" data-e="rate"></td>
-        <td class="r mono">—</td><td class="r mono">—</td>
-        <td style="min-width:104px"><div class="rowbtns">
+        <td data-label="數量"><input type="number" step="any" value="${r.qty}" data-e="qty"></td>
+        <td data-label="單價"><input type="number" step="any" value="${r.price}" data-e="price"></td>
+        <td data-label="幣別"><select data-e="currency">${CURRENCIES.map(([x])=>`<option ${x===r.currency?'selected':''}>${x}</option>`).join('')}</select></td>
+        <td data-label="匯率"><input type="number" step="any" value="${r.rate}" data-e="rate"></td>
+        <td class="r mono c-orig">—</td><td class="r mono c-base">—</td>
+        <td class="c-act" style="min-width:104px"><div class="rowbtns">
           <button class="iconbtn" data-act="commit">儲存</button>
           <button class="iconbtn" data-act="cancel">取消</button></div></td>
       </tr>`;
     }
     return `<tr data-id="${r.id}" class="${selection.has(r.id)?'picked':''}">
       <td class="selcell"><input type="checkbox" class="rowsel" data-id="${r.id}" ${selection.has(r.id)?'checked':''} aria-label="選取"></td>
-      <td class="mono" style="white-space:nowrap">${esc(r.date)}</td>
-      <td>${esc(r.item)}${r.shot?` <button type="button" class="iconbtn clip" data-shot="${r.id}" title="看收據照片">📎</button>`:''}${r.note?`<div style="font-size:11.5px;color:var(--ink-faint)">${esc(r.note)}</div>`:''}</td>
-      <td><span class="catpill"><span class="dot" style="background:${c.color}"></span>${esc(r.category)}</span></td>
-      <td>${r.trip?`<span class="catpill"><span class="dot" style="background:${tripOf(r.trip).color}"></span>${esc(r.trip)}</span>`:'<span style="color:var(--ink-faint)">—</span>'}</td>
-      <td><span class="catpill"><span class="dot" style="background:${payOf(r.pay).color}"></span>${esc(r.pay||'現金')}</span>${r.account?`<div style="font-size:11.5px;color:var(--ink-faint)">${esc(r.account)}</div>`:''}</td>
-      <td class="r mono">${nf2.format(r.qty)}</td>
-      <td class="r mono">${nf2.format(r.price)}</td>
-      <td class="mono">${esc(r.currency)}</td>
-      <td class="r mono" style="color:var(--ink-faint)">${r.currency===BASE?'—':nf2.format(r.rate)}</td>
-      <td class="r mono">${nf2.format(origTotal(r))}</td>
-      <td class="r mono" style="font-weight:700">${money(baseTotal(r))}</td>
-      <td><div class="rowbtns">
+      <td class="mono c-date" style="white-space:nowrap">${esc(r.date)}</td>
+      <td class="c-item">${esc(r.item)}${r.shot?` <button type="button" class="iconbtn clip" data-shot="${r.id}" title="看收據照片">📎</button>`:''}${r.note?`<div style="font-size:11.5px;color:var(--ink-faint);font-weight:400">${esc(r.note)}</div>`:''}</td>
+      <td class="c-cat"><span class="catpill"><span class="dot" style="background:${c.color}"></span>${esc(r.category)}</span></td>
+      <td class="c-trip">${r.trip?`<span class="catpill"><span class="dot" style="background:${tripOf(r.trip).color}"></span>${esc(r.trip)}</span>`:'<span style="color:var(--ink-faint)">—</span>'}</td>
+      <td class="c-pay"><span class="catpill"><span class="dot" style="background:${payOf(r.pay).color}"></span>${esc(r.pay||'現金')}</span>${r.account?`<div style="font-size:11.5px;color:var(--ink-faint)">${esc(r.account)}</div>`:''}</td>
+      <td class="c-amt" data-label="" style="display:none">${nf2.format(r.qty)} × ${nf2.format(r.price)}</td>
+      <td class="r mono c-qty">${nf2.format(r.qty)}</td>
+      <td class="r mono c-price">${nf2.format(r.price)}</td>
+      <td class="mono c-cur" data-label="幣別">${esc(r.currency)}</td>
+      <td class="r mono c-rate" data-label="匯率" style="color:var(--ink-faint)">${r.currency===BASE?'—':nf2.format(r.rate)}</td>
+      <td class="r mono c-orig" data-label="原幣">${nf2.format(origTotal(r))}</td>
+      <td class="r mono c-base" style="font-weight:700">${money(baseTotal(r))}</td>
+      <td class="c-act"><div class="rowbtns">
         <button class="iconbtn" data-act="edit">修改</button>
         <button class="iconbtn del" data-act="del">刪除</button></div></td>
     </tr>`;
